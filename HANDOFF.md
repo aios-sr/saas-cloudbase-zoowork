@@ -14,6 +14,6 @@ README、执行流程、架构与前置检查已引用该专题，项目 AGENTS�
 
 ## 发布与上下文
 
-目标为 aios-sr/saas-cloudbase-zoowork 私有 GitHub 仓库，以 PR 合并到 main 发布文档，不另部署应用。初次文档发布记录见 [PR #1](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/1)；本轮 PR 将记录合并提交、检查与线上读取的实际结果。
+目标为 aios-sr/saas-cloudbase-zoowork 私有 GitHub 仓库，以 PR 合并到 main 发布文档，不另部署应用。初次文档发布记录见 [PR #1](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/1)；本轮 [PR #2](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/2) 记录合并提交、检查与线上读取的实际结果。
 
 生成应用固定仓库、VERSION、完整提交与采用范围，保留自己的技术决定、PRECHECK 和恢复点；不自动跟随本仓库 main，也不依赖原聊天。
