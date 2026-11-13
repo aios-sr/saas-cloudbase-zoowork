@@ -36,6 +36,8 @@ CloudBase SDK 路径以 [PG SDK 初始化](https://docs.cloudbase.net/api-refere
 
 ## 2. 按阶段检查配置与 Key
 
+创建、填写或加载本地配置前先执行 [.env 生命周期](ENVIRONMENT.md)。本地 doctor 显式加载所选本地文件；deploy 阶段只验证目标版本注入，不用本地文件补缺项。
+
 变量用途与秘密分类以 [配置合同](ARCHITECTURE.md) 为单一来源；以下只定义生效条件。将实际采用的认证／数据库路径写入 PROJECT_BASELINE，不要求产品人员选择字段名称或 SDK。
 
 | 阶段 | 必需条件 | 缺失时允许继续的工作 |

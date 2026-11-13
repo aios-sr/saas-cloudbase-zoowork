@@ -2,16 +2,18 @@
 
 ## 当前范围
 
-版本 0.3.0，分支 docs/online-guide。已将原开发技能改写为 GitHub 文档模式：README 作为产品人员与 Codex 的入口，docs 保存执行流程、前置检查、架构、ZooWork、Agent／业务 Skill、上下文及交付规则，templates 保存新项目文件。
+规范版本 0.4.0，本轮开发分支 docs/env-file-lifecycle。新增 docs/ENVIRONMENT.md 及 templates/gitignore、templates/dockerignore，补齐新应用本地 .env 的位置、独占创建、既有值保留、忽略与权限、显式加载和生产隔离。
 
-已移除技能入口和调用元数据，不再要求安装或点名调用。本仓库原开发技能未安装到用户技能目录，无需卸载；ZooWork 运行时业务 Skill 机制保留。未修改来源客户项目、真实 Key 或云资源，未调用模型。
+README、执行流程、架构与前置检查已引用该专题，项目 AGENTS／PRECHECK 和环境模板同步约定。变量用途与阶段条件保留原有单一来源；员工 Key 仍由后端开通并加密保存，不新增全局执行 Key。
 
-## 版本与上下文
+## 验证
 
-规范版本保存于 VERSION。生成应用记录来源仓库、完整提交、版本与采用范围，并在项目内保存实际决定、前置证据和恢复点；后续会话不依赖原聊天或实时访问文档仓库。
+文档检查与真实 Git 忽略场景通过；在临时目录用 Node.js v24.15.0 验证初始化示例与加载优先级，未修改开发者本地配置。故障样例覆盖忽略遗漏与反向包含，结果见 docs/VALIDATION.md。
 
-## 发布目标与状态
+未创建真实 .env、读取或写入 Key、安装依赖、构建 Docker 镜像、调用模型或修改客户应用／云资源。未来生成应用仍需实现并验证实际加载入口、doctor 和生产配置。
 
-已创建并核对 aios-sr/saas-cloudbase-zoowork 为私有 GitHub 仓库。远程默认 main 仅用初始化 README 建立 PR 基线；完整规范内容通过功能分支 PR 合并发布。README 是线上入口，不另部署网站。
+## 发布与上下文
 
-本地文档、故障样例和两张图表检查通过。[发布 PR #1](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/1) 记录检查、合并提交与私有在线读取结果，最终状态以 PR 为准；文档检查不代表生成应用已经上线。
+目标为 aios-sr/saas-cloudbase-zoowork 私有 GitHub 仓库，以 PR 合并到 main 发布文档，不另部署应用。初次文档发布记录见 [PR #1](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/1)；本轮 PR 将记录合并提交、检查与线上读取的实际结果。
+
+生成应用固定仓库、VERSION、完整提交与采用范围，保留自己的技术决定、PRECHECK 和恢复点；不自动跟随本仓库 main，也不依赖原聊天。

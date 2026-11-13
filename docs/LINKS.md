@@ -11,6 +11,7 @@
 | Vite | [构建与开发](https://vite.dev/guide/) |
 | React Router | [路由接入](https://reactrouter.com/start/declarative/installation) |
 | Tailwind 与 Vite | [官方安装说明](https://tailwindcss.com/docs/installation/using-vite) |
+| 配置文件 | [Node 环境文件](https://nodejs.org/api/cli.html#--env-filefile)、[Vite 环境变量](https://vite.dev/guide/env-and-mode)、[Git 忽略](https://git-scm.com/docs/gitignore)、[Docker 忽略](https://docs.docker.com/build/concepts/context/#dockerignore-files) |
 | Hono | [框架文档](https://hono.dev/docs) |
 | CloudBase 环境 | [模式与资源](https://docs.cloudbase.net/quick-start/env-overview) |
 | CloudBase PG | [连接数据库](https://docs.cloudbase.net/database/postgresql/connecting-to-postgresql) |
