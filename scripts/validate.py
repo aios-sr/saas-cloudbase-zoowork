@@ -13,7 +13,7 @@ SKILL = ROOT / 'skills' / 'saas-cloudbase-zoowork'
 def validate():
     required = [
         'SKILL.md', 'agents/openai.yaml',
-        'references/architecture.md', 'references/zoowork.md',
+        'references/architecture.md', 'references/prerequisites.md', 'references/zoowork.md',
         'references/agents-and-skills.md', 'references/delivery.md',
         'references/links.md', 'assets/templates/AGENTS.md',
         'assets/templates/PRODUCT.md', 'assets/templates/HANDOFF.md',
@@ -61,18 +61,20 @@ def validate():
                 errors.append('本地引用失效或越出仓库：' + str(path.relative_to(ROOT)))
 
     variables = []
+    architecture = (SKILL / 'references/architecture.md').read_text()
     for line in (SKILL / 'assets/templates/env.example').read_text().splitlines():
-        if not line or line.startswith('#'):
+        if not line:
             continue
-        if not re.fullmatch(r'[A-Z][A-Z0-9_]*=.*', line):
-            errors.append('环境变量模板格式错误')
+        assignment = re.fullmatch(r'(?:#\s*)?([A-Z][A-Z0-9_]*)=(.*)', line)
+        if not assignment:
+            if not line.startswith('#'):
+                errors.append('环境变量模板格式错误')
             continue
-        name, value = line.split('=', 1)
+        name, value = assignment.groups()
         variables.append(name)
         defaults = {'PORTAL_ENABLED': 'true', 'APP_ORIGIN': 'http://127.0.0.1:8787', 'PORT': '8787'}
         if value != defaults.get(name, ''):
             errors.append('环境模板含非空秘密或未经定义的默认值：' + name)
-        architecture = (SKILL / 'references/architecture.md').read_text()
         if '`' + name + '`' not in architecture:
             errors.append('环境变量缺少定义：' + name)
     if len(set(variables)) != len(variables):

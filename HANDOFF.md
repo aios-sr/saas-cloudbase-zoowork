@@ -1,5 +1,13 @@
 # 开发交接
 
+## 0.2.0：依赖、凭据前置条件与上下文恢复
+
+- 当前分支 feat/prerequisite-checks。新增 references/prerequisites.md，明确 CloudBase 管理工具、应用 SDK、ZooWork SDK／UI 的安装和验证，以及 local、cloudbase、provision、agent、deploy 分阶段准入。
+- 条件凭据不设为全局必填；员工 Key 由后端开通并加密保存。应用 doctor 与本 Skill 包检查分开，诊断不安装、开通或调用模型。
+- 新增每轮开工、阶段回写和中断交接规则；目标项目用 AGENTS、PRODUCT、PROJECT_BASELINE、架构、PRECHECK、HANDOFF 与 Git 恢复可验证事实。
+- 验证完成：包检查、quick_validate、复制包独立检查通过；断裂／缺失引用以及必填、条件秘密误填均会被拒绝。独立离线试跑覆盖无账号起步、HTTP 路径条件凭据及员工未开通、新会话恢复三个场景，未发现规则冲突；只验证流程，不代表应用已运行。
+- 本轮保存于本地功能分支，未安装依赖、配置真实秘密、创建云资源或调用模型；没有远程仓库，未创建 PR、合并、发布或安装。
+
 ## 初始范围
 
 已建立独立的 SaaS 开发 Skill 源码仓库：Skill 入口、按需读取的架构与接入规则、多 Agent 协作、官方链接、项目模板及本地包检查。未复制原业务仓库、真实资源配置、客户资料或凭据。

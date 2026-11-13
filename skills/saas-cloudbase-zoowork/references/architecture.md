@@ -53,7 +53,8 @@ flowchart LR
 新项目可采用以下目录；已有工程保持原有清晰结构，不为目录名字做无关重构。
 
 ```text
-docs/PROJECT_BASELINE.md     已采用的技术决策、Skill 版本与例外
+docs/PROJECT_BASELINE.md      已采用的技术决策、Skill 版本与例外
+docs/PRECHECK.md              前置检查状态、证据与受阻能力
 AGENTS.md                    本项目的执行与发布规则，引用已采用的技术决策
 PRODUCT.md                   用户、核心流程、边界和验收标准
 README.md                    本地启动、预览与正式入口
@@ -73,6 +74,8 @@ scripts/                     配置检查、方法构建及受控维护
 ```
 
 阶段、角色、Agent 规格、Skill 名单、状态含义和品牌配置分别只有一个定义源。业务角色与输入输出可以通过共享 TypeScript／Zod 合同复用，但后端模块、秘密配置和员工客户端不能被打包进前端。
+
+安装、配置准入与应用 doctor 的阶段规则见 [开发前置检查](prerequisites.md)。
 
 ## 5. CloudBase 初始化与资源隔离
 
@@ -103,7 +106,10 @@ CloudBase 环境是资源与计费隔离单位，模式和环境 ID 应以实际
 | `CLOUDBASE_REGION` | 非秘密环境标识 | 目标环境的实际地域，与项目站点记录一致 |
 | `CLOUDBASE_SERVICE_NAME` | 非秘密部署标识 | 本应用云托管服务名，由新产品资源前缀派生 |
 | `CLOUDBASE_HTTP_BASE` | 后端配置 | 当前环境正式返回的 HTTP API 根地址，不猜测、不沿用旧项目 |
-| `CLOUDBASE_APIKEY` | 后端秘密 | 当前应用专用的服务端 API Key；浏览器不可获得 |
+| `CLOUDBASE_APIKEY` | 后端秘密 | 默认 HTTP 后端路径的应用专用服务端 API Key；浏览器不可获得 |
+| `CLOUDBASE_SECRET_ID`／`CLOUDBASE_SECRET_KEY` | 条件启用的后端秘密 | 仅所选服务端 SDK 路径需要 CAM 凭据时成对配置；代码显式映射到 SDK 参数，不复用其他项目身份 |
+| `CLOUDBASE_SESSION_TOKEN` | 条件启用的后端秘密 | 使用临时 CAM 凭据时的 Token，配合其有效期管理；按所选 SDK 显式映射 |
+| `DATABASE_URL` | 条件启用的后端秘密 | 仅 PG 协议直连路径启用，包含数据库连接凭据；默认 HTTP 路径不要求 |
 | `CLOUDBASE_STORAGE_BUCKET` | 非秘密后端配置 | 本应用实际创建的私有 PG 桶 ID；代码显式读取，不能保留参考项目默认桶名 |
 | `CLOUDBASE_PUBLISHABLE_KEY` | 可公开的初始化配置 | 用于原生认证初始化；不能替代用户登录和权限策略 |
 | `CLOUDBASE_CUSTOM_CREDENTIALS` | 按认证方式启用的后端秘密 | 仅自定义登录签票桥接时使用；参考合同为包含 `env_id`、`private_key_id`、`private_key` 的 JSON 字符串，按目标环境官方方式取得 |

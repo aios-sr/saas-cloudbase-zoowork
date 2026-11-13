@@ -20,8 +20,11 @@
 
 - [Skill 入口](skills/saas-cloudbase-zoowork/SKILL.md)：业务收集、实施顺序与完成条件。
 - [参考文档](skills/saas-cloudbase-zoowork/references/architecture.md)：技术架构、CloudBase、环境变量与身份；其余内容由入口按需引导。
+- [开发前置检查](skills/saas-cloudbase-zoowork/references/prerequisites.md)：工具、SDK／UI 安装、分阶段 Key 准入与应用 doctor。
 - [项目模板](skills/saas-cloudbase-zoowork/assets/templates/)：AGENTS、PRODUCT、HANDOFF 和空值环境变量示例。
 - [验证记录](docs/VALIDATION.md)：本包检查、独立场景试跑及未验证范围。
+
+生成项目以 AGENTS、产品与架构记录、PRECHECK、HANDOFF 和 Git 恢复上下文；每轮开工读取、阶段完成回写，不能只依赖聊天历史。
 
 调用前需有 Codex 的文件与开发工具；真实接入还需要所选 CloudBase 环境、服务商账号及 UI 包的合法使用权限。没有权限时先完成可预览、可审查的部分，不自动复用其他项目资源，也不要求产品人员在聊天中粘贴密钥。部署、真实模型费用和外部操作按实际授权处理。
 

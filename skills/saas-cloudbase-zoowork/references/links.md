@@ -2,7 +2,7 @@
 
 ## 官方文档
 
-文档链接核对日期为 2026-11-12。接口、工具名称和私有包权限可能变化；新项目安装后以当前官方合同、包内类型与受控验证为准。使用完整链接；实际接入前核对当前官方文档与所装包类型。
+基础链接核对日期为 2026-11-12；本轮新增的插件、SDK 安装来源与 ZooWork SDK 安装说明于 2026-11-13 复核。接口、工具名称和私有包权限可能变化；新项目安装后以当前官方合同、包内类型与受控验证为准。使用完整链接；实际接入前核对当前官方文档与所装包类型。
 
 | 内容 | 文档 |
 | --- | --- |
@@ -17,6 +17,8 @@
 | CloudBase 身份 | [PG 身份与权限](https://docs.cloudbase.net/authentication-v2/auth/auth-pg) |
 | CloudBase 存储 | [PG Storage API](https://docs.cloudbase.net/api-reference/webv3-pg/storage) |
 | CloudBase 部署 | [云托管说明](https://docs.cloudbase.net/run/introduction)、[服务设置](https://docs.cloudbase.net/run/deploy/service-setting) |
+| CloudBase SDK 安装 | [PG SDK 初始化](https://docs.cloudbase.net/api-reference/webv3-pg/initialization)、[Node SDK](https://docs.cloudbase.net/quick-start/frameworks/nodejs) |
+| CloudBase 插件安装 | [官方插件](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/ai-agent-plugins) |
 | CloudBase 工具 | [MCP 连接方式](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/connection-modes)、[工具文档](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/api-reference) |
 | Partner 合同 | [公开接入说明](https://ecap-partner-gateway.ecap.gsmo.ai/partner/v1/docs) |
 | ZooWork SDK | [TypeScript SDK](https://zoowork.ai/docs/en/reference/typescript-sdk)、[快速开始](https://zoowork.ai/docs/en/get-started/quickstart) |
