@@ -1,41 +1,50 @@
-# CloudBase 与 ZooWork SaaS 开发 Skill
+# CloudBase 与 ZooWork SaaS 开发规范
 
-面向产品人员，通过 Codex 构建 React＋TypeScript、CloudBase 与 ZooWork 企业 SaaS。默认处理员工身份、租户隔离、Agent／业务 Skill 复用、持久任务和 PR 发布；具体产品、专业方法与账号资源由新项目定义。
+把本页链接和业务需求交给 Codex，即可按统一规范启动 React＋TypeScript、CloudBase 与 ZooWork 企业 SaaS 开发。产品人员描述使用者、核心流程和交付物，技术准备、实现、验证与交接由 Codex 按文档执行。
 
-本仓库独立维护通用开发 Skill，不包含可直接部署的 SaaS 源码、客户资料或凭据。当前版本见 [SKILL.md](skills/saas-cloudbase-zoowork/SKILL.md) 的 `metadata.version`。
+本仓库以 GitHub Markdown 文档和模板提供规范，无需安装本仓库或使用 Skill 调用命令。CloudBase 管理插件、应用依赖及 ZooWork 业务 Skill 按实际接入阶段分别准备。本仓库不是可直接部署的 SaaS 源码。
 
-## 开始使用
+## 产品人员如何开始
 
-首次可直接在 Codex 中指定本地文件：
+将下面这段话和本页链接一起发给 Codex，补充方括号中的业务内容：
 
-> 使用 $saas-cloudbase-zoowork；若尚未安装，先读取本仓库 skills/saas-cloudbase-zoowork/SKILL.md，并按其指引为我构建一个 SaaS。产品给【使用者】使用，主要流程是【输入、处理与交付物】。技术方案使用默认约定，先完成可操作的预览。
+> 请阅读 https://github.com/aios-sr/saas-cloudbase-zoowork/blob/main/README.md ，按这个仓库的开发规范创建一个独立 SaaS。产品给【哪些人】使用，第一版核心流程是【输入什么、系统做什么、最终交付什么】。我已有【品牌资料、业务方法或示例】。技术方案按规范默认项处理；先完成可操作的预览，再完成验证和 PR，发布按已有授权办理。请先固定所采用的文档提交版本，并把项目决定和进度保存在新项目内。
 
-需要在其他项目中方便调用时，将整个 `skills/saas-cloudbase-zoowork` 目录安装到 Codex 的个人技能目录。默认位置为 `~/.codex/skills/saas-cloudbase-zoowork`；设置了 `CODEX_HOME` 时使用该目录下的 `skills/saas-cloudbase-zoowork`。由 Codex 按当前安装机制办理；已有同名 Skill 时先核对版本，不直接覆盖。本 Skill 关闭自动触发，安装后仅在点名时调用。新会话使用：
+该仓库为私有仓库，Codex 所用 GitHub 账号需要访问权限。无法读取时，由账号负责人通过安全界面登录／授权，或提供同一提交的完整文档副本；不要在聊天中粘贴 Token，也不要假装已读。不能只取得 README 就声称已读取全部规范。
 
-> 使用 $saas-cloudbase-zoowork，帮采购团队做一个供应商评估系统。员工提交供应商资料，系统生成评估草稿，由负责人确认后保存。
+## Codex 阅读入口
 
-安装的是供 Codex 开发应用的 Skill；应用运行时的 ZooWork 业务 Skill 由生成的应用分别管理。两者的版本、权限和更新记录各自独立。
+仅在用户明确要求采用这套 React＋TypeScript、CloudBase、ZooWork 方案时使用。已有业务决定、目标仓库有效约定和当前授权优先；不要自动迁移无关项目。
 
-## 内容
+先将本次读取的分支或链接解析为完整提交 SHA，再从同一提交读取 `VERSION`、下面所需文档及模板。记录仓库地址、文档版本、完整提交号和采用范围；不要在一次开发中混读不同时间的 main。
 
-- [Skill 入口](skills/saas-cloudbase-zoowork/SKILL.md)：业务收集、实施顺序与完成条件。
-- [参考文档](skills/saas-cloudbase-zoowork/references/architecture.md)：技术架构、CloudBase、环境变量与身份；其余内容由入口按需引导。
-- [开发前置检查](skills/saas-cloudbase-zoowork/references/prerequisites.md)：工具、SDK／UI 安装、分阶段 Key 准入与应用 doctor。
-- [项目模板](skills/saas-cloudbase-zoowork/assets/templates/)：AGENTS、PRODUCT、HANDOFF 和空值环境变量示例。
-- [验证记录](docs/VALIDATION.md)：本包检查、独立场景试跑及未验证范围。
+| 阅读时机 | 文档 | 应得到的结果 |
+| --- | --- | --- |
+| 开始任务必读 | [开发执行流程](docs/WORKFLOW.md) | 核心流程、实施顺序和阶段完成条件 |
+| 初始化和真实接入前 | [开发前置检查](docs/PREREQUISITES.md) | 工具、SDK／UI、分阶段 Key 准入与只读诊断 |
+| 架构与环境准备 | [架构与配置](docs/ARCHITECTURE.md) | 默认技术方案、身份隔离与变量合同 |
+| 企业成员及用量接入 | [ZooWork 接入](docs/ZOOWORK.md) | Partner 管理与员工 Agent 身份分离 |
+| 任何 Agent／后台任务实现前 | [Agent、业务 Skill 与任务](docs/AGENTS_AND_SKILLS.md) | 多 Agent 编排、方法版本、持久恢复和定时服务 |
+| 每轮开工与交接 | [上下文与规范版本](docs/CONTEXT.md) | 本地持久记录、恢复点及受控升级 |
+| 实现、验收和发布 | [数据、UI 与交付](docs/DELIVERY.md) | 完整组件接入、验收、PR、发布与回滚 |
+| 查接口与依赖 | [官方入口](docs/LINKS.md) | 按当前官方合同和所装类型核对能力 |
 
-生成项目以 AGENTS、产品与架构记录、PRECHECK、HANDOFF 和 Git 恢复上下文；每轮开工读取、阶段完成回写，不能只依赖聊天历史。
+新项目使用 [项目模板](templates/) 建立自己的 AGENTS、产品、技术基线、前置检查、交接与空值配置；已有文件精准增补，不直接覆盖。项目内必须保存实际采用的关键规则和决定，后续会话不能只依靠本页链接或原聊天记录。
 
-调用前需有 Codex 的文件与开发工具；真实接入还需要所选 CloudBase 环境、服务商账号及 UI 包的合法使用权限。没有权限时先完成可预览、可审查的部分，不自动复用其他项目资源，也不要求产品人员在聊天中粘贴密钥。部署、真实模型费用和外部操作按实际授权处理。
+## 版本与已有项目
 
-## 维护
+当前规范版本见 [VERSION](VERSION)。完整提交 SHA 是内容的精确标识；版本号本身不代替 Git 提交，也不假定同名 Git tag 已存在。
 
-修改 `skills/saas-cloudbase-zoowork` 中的单一来源，提升 `metadata.version` 并同步验证记录；不维护另一份相同的长篇规范。新应用将实际采用的技术决定、Skill 版本和例外保存在自己的项目文档中，升级时审查差异，不强行改写已有应用。
+新应用固定本次采用的提交。已有应用保留原基线，升级时审查文档差异、写明影响、执行所需验证后更新项目记录；线上文档变化不自动改写应用，也不作为运行时依赖。
 
-本地检查：
+缺账号或权限时先完成可独立验证的规划和本地部分；缺本阶段必需项时阻断对应真实能力。真实 Key 仅经安全渠道保存在后端，员工 Key 由后端开通取得。模型会消耗 credits，最小真实验收和发布按实际授权执行。
+
+## 文档维护与检查
+
+在本仓库修改单一来源并更新 VERSION、验证和交接记录；功能分支提 PR、检查通过后合并。GitHub main 上的 README 是线上入口，无需另建网站或部署应用。
 
 ```sh
 python3 scripts/validate.py
 ```
 
-该命令只检查包结构、引用和空值模板，不调用云端或模型。真实行为试跑与云端验收另行记录，不能把静态检查当作完整应用验证。首次 GitHub 发布前配置远程仓库并走 PR；本地仓库创建不等于远程发布。未确定许可证前，不自行宣称可公开分发第三方包或资料。
+该命令检查文档、相对引用、版本和空值模板，不访问云端或模型；它不能代替生成应用的 doctor、浏览器和真实业务验收。实际范围见 [验证记录](docs/VALIDATION.md)，维护进度见 [开发交接](HANDOFF.md)。

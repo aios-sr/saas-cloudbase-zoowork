@@ -4,7 +4,7 @@
 
 ## 1. 开发工具与应用依赖分开准备
 
-先检查目标项目、已有安装与授权。仅补齐所需能力；安装本 SaaS Skill 不会自动安装 CloudBase 插件、npm SDK 或 UI 包。
+先检查目标项目、已有安装与授权。仅补齐所需能力；阅读本开发规范不会自动安装 CloudBase 插件、npm SDK 或 UI 包。
 
 | 层次 | 准备与安装路径 | 进入后续阶段前的证据 |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ npx plugins add TencentCloudBase/cloudbase-plugin -y --scope user --target codex
 
 如果已包含所需 CloudBase Skills，不重复安装；仅装 Skills 不等于 MCP 已连接。不同客户端可能使用市场安装方式，按本次客户端的官方说明选择。[CloudBase 开发工具](https://docs.cloudbase.net/ai/cloudbase-ai-toolkit/)
 
-应用首次添加依赖的命令形态如下；Codex 先选兼容版本再安装，提交实际 package.json 与锁文件。已有锁文件且无新增依赖时使用 `npm ci`；不升级全部大版本，也不在本 Skill 源码仓库安装应用依赖。
+应用首次添加依赖的命令形态如下；Codex 先选兼容版本再安装，提交实际 package.json 与锁文件。已有锁文件且无新增依赖时使用 `npm ci`；不升级全部大版本，也不在本规范仓库安装应用依赖。
 
 ```sh
 npm install @cloudbase/js-sdk
@@ -36,7 +36,7 @@ CloudBase SDK 路径以 [PG SDK 初始化](https://docs.cloudbase.net/api-refere
 
 ## 2. 按阶段检查配置与 Key
 
-变量用途与秘密分类以 [配置合同](architecture.md) 为单一来源；以下只定义生效条件。将实际采用的认证／数据库路径写入 PROJECT_BASELINE，不要求产品人员选择字段名称或 SDK。
+变量用途与秘密分类以 [配置合同](ARCHITECTURE.md) 为单一来源；以下只定义生效条件。将实际采用的认证／数据库路径写入 PROJECT_BASELINE，不要求产品人员选择字段名称或 SDK。
 
 | 阶段 | 必需条件 | 缺失时允许继续的工作 |
 | --- | --- | --- |
@@ -62,7 +62,7 @@ CloudBase SDK 路径以 [PG SDK 初始化](https://docs.cloudbase.net/api-refere
 
 ## 3. 在生成应用中实现 doctor
 
-由 Codex 在目标应用中实现入口，例如 `npm run doctor -- --stage local`；stage 只接受 `local`、`cloudbase`、`provision`、`agent`、`deploy` 中的一个值。默认只检查 `local`，不因无 Key 误发上游请求。`agent` 通过非秘密成员／对象 ID 选择明确执行范围，不收明文 Key 参数。该命令是生成项目的合同，本 Skill 包没有预制适用于所有应用的运行脚本。
+由 Codex 在目标应用中实现入口，例如 `npm run doctor -- --stage local`；stage 只接受 `local`、`cloudbase`、`provision`、`agent`、`deploy` 中的一个值。默认只检查 `local`，不因无 Key 误发上游请求。`agent` 通过非秘密成员／对象 ID 选择明确执行范围，不收明文 Key 参数。该命令是生成项目的合同，本规范仓库没有预制适用于所有应用的运行脚本。
 
 逐项报告检查 ID、是否为本阶段必需、状态与非秘密证据。状态限定为 `pass`、`fail`、`blocked`、`not_applicable`；缺失或未执行的必需项记 blocked／fail，不能假报 pass。可选功能未启用时记 not_applicable；其他阶段仍必需的凭据不能被永久标成不适用。当前阶段全部必需项通过才退出 0，否则非零，并在报告与 HANDOFF 留下受影响能力和下一步。
 
@@ -70,4 +70,4 @@ Key 的“本地存在、当前进程加载、目标服务版本注入、实际�
 
 doctor 只读检查，不创建企业、成员、Agent、Session 或 Skill，不发码、兑换、发登录验证码、不写迁移、不发布、不调用模型，也不执行插件／依赖安装。安装、生成根钥、开通成员与最小真实模型验收属于各自显式的准备或实施步骤，不通过诊断命令暗中执行。目标只读认证接口按当前合同核对；没有可用安全读取方式时保留 blocked，不拿写操作探测权限。
 
-报告保存在目标项目 docs/PRECHECK.md，关联阶段、时间和非秘密版本；不得保存原始秘密回包或客户正文。项目变更依赖、环境、凭据绑定或认证路径后，重跑受影响阶段。Skill 仓库的 scripts/validate.py 只验证包结构与模板，不能作为应用 doctor 或云端凭据验收。
+报告保存在目标项目 docs/PRECHECK.md，关联阶段、时间和非秘密版本；不得保存原始秘密回包或客户正文。项目变更依赖、环境、凭据绑定或认证路径后，重跑受影响阶段。本规范仓库的 scripts/validate.py 只验证文档与模板，不能作为应用 doctor 或云端凭据验收。

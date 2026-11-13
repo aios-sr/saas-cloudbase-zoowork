@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""只读检查本仓库 Skill 包及模板，不访问网络或读取应用秘密。"""
+"""只读检查文档仓库与模板，不访问网络或读取应用秘密。"""
 
 from pathlib import Path
 import re
@@ -7,47 +7,41 @@ import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / 'skills' / 'saas-cloudbase-zoowork'
 
 
 def validate():
     required = [
-        'SKILL.md', 'agents/openai.yaml',
-        'references/architecture.md', 'references/prerequisites.md', 'references/zoowork.md',
-        'references/agents-and-skills.md', 'references/delivery.md',
-        'references/links.md', 'assets/templates/AGENTS.md',
-        'assets/templates/PRODUCT.md', 'assets/templates/HANDOFF.md',
-        'assets/templates/env.example',
+        'README.md', 'AGENTS.md', 'HANDOFF.md', 'VERSION',
+        'docs/WORKFLOW.md', 'docs/ARCHITECTURE.md', 'docs/PREREQUISITES.md',
+        'docs/ZOOWORK.md', 'docs/AGENTS_AND_SKILLS.md', 'docs/CONTEXT.md',
+        'docs/DELIVERY.md', 'docs/LINKS.md', 'docs/VALIDATION.md',
+        'templates/AGENTS.md', 'templates/PRODUCT.md', 'templates/HANDOFF.md',
+        'templates/PROJECT_BASELINE.md', 'templates/PRECHECK.md',
+        'templates/env.example',
     ]
     errors = []
     for name in required:
-        if not (SKILL / name).is_file():
+        if not (ROOT / name).is_file():
             errors.append('缺少文件：' + name)
     if errors:
         return errors
-
-    entry = (SKILL / 'SKILL.md').read_text()
-    front = re.match(r'\A---\n(.*?)\n---\n', entry, re.S)
-    if not front:
-        errors.append('入口缺少闭合的 YAML 头部')
-    else:
-        if not re.search(r'^name: saas-cloudbase-zoowork$', front[1], re.M):
-            errors.append('Skill 名称与目录不一致')
-        if not re.search(r'^description: \S.+$', front[1], re.M):
-            errors.append('缺少触发描述')
-        if not re.search(r'^  version: "\d+\.\d+\.\d+"$', front[1], re.M):
-            errors.append('缺少明确的语义版本')
+    if not re.fullmatch(r'\d+\.\d+\.\d+\n', (ROOT / 'VERSION').read_text()):
+        errors.append('规范版本须为独立的语义版本号')
+    if (ROOT / 'skills').exists() or (ROOT / 'agents').exists() or (ROOT / 'SKILL.md').exists():
+        errors.append('本仓库不能保留 Codex 技能入口或安装目录')
 
     for path in ROOT.rglob('*'):
         if not path.is_file() or '.git' in path.parts:
             continue
-        if path.suffix not in {'.md', '.yaml', '.example'}:
+        if path.suffix not in {'.md', '.example'}:
             continue
         content = path.read_text()
         if re.search(r'(?:zpk|zwp)_live_[A-Za-z0-9_-]{12,}', content):
             errors.append('疑似真实凭据：' + str(path.relative_to(ROOT)))
         if path.suffix != '.md':
             continue
+        if re.search(r'\$saas-cloudbase-zoowork|metadata\.version|assets/templates/|references/', content):
+            errors.append('残留旧的技能调用或内部路径：' + str(path.relative_to(ROOT)))
         if len(re.findall(r'^```', content, re.M)) % 2:
             errors.append('代码围栏未成对：' + str(path.relative_to(ROOT)))
         for target in re.findall(r'\]\(([^)]+)\)', content):
@@ -61,8 +55,8 @@ def validate():
                 errors.append('本地引用失效或越出仓库：' + str(path.relative_to(ROOT)))
 
     variables = []
-    architecture = (SKILL / 'references/architecture.md').read_text()
-    for line in (SKILL / 'assets/templates/env.example').read_text().splitlines():
+    architecture = (ROOT / 'docs/ARCHITECTURE.md').read_text()
+    for line in (ROOT / 'templates/env.example').read_text().splitlines():
         if not line:
             continue
         assignment = re.fullmatch(r'(?:#\s*)?([A-Z][A-Z0-9_]*)=(.*)', line)
@@ -79,11 +73,6 @@ def validate():
             errors.append('环境变量缺少定义：' + name)
     if len(set(variables)) != len(variables):
         errors.append('环境变量模板有重复定义')
-    metadata = (SKILL / 'agents/openai.yaml').read_text()
-    if '$saas-cloudbase-zoowork' not in metadata:
-        errors.append('界面提示缺少 Skill 调用名称')
-    if not re.search(r'^  allow_implicit_invocation: false$', metadata, re.M):
-        errors.append('Skill 必须关闭自动触发')
     return errors
 
 
@@ -93,5 +82,5 @@ if __name__ == '__main__':
         print('失败：' + failure, file=sys.stderr)
     if failures:
         sys.exit(1)
-    print('通过：包结构、入口标识、仓库内引用、围栏、环境模板与凭据模式检查。')
-    print('未执行：链接在线可达性、Codex 自动触发、UI 包安装、云资源与真实模型验收。')
+    print('通过：文档结构、规范版本、相对引用、空值模板与旧技能入口移除检查。')
+    print('未执行：私有仓库在线读取、依赖安装、云资源或真实模型验收。')
