@@ -14,4 +14,4 @@
 
 已创建并核对 aios-sr/saas-cloudbase-zoowork 为私有 GitHub 仓库。远程默认 main 仅用初始化 README 建立 PR 基线；完整规范内容通过功能分支 PR 合并发布。README 是线上入口，不另部署网站。
 
-本地文档、故障样例和两张图表检查通过。PR、合并提交与在线读取结果将在对应 PR 中记录；文档检查不代表生成应用已经上线。
+本地文档、故障样例和两张图表检查通过。[发布 PR #1](https://github.com/aios-sr/saas-cloudbase-zoowork/pull/1) 记录检查、合并提交与私有在线读取结果，最终状态以 PR 为准；文档检查不代表生成应用已经上线。
