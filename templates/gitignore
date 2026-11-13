@@ -1,0 +1,6 @@
+# 合并到新应用 .gitignore；示例可提交，真实本地配置不可提交。
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
