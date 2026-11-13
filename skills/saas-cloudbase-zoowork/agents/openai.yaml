@@ -1,0 +1,7 @@
+interface:
+  display_name: "CloudBase 与 ZooWork SaaS 开发"
+  short_description: "面向产品人员，按 React、CloudBase 与 ZooWork 约定构建 SaaS 应用"
+  default_prompt: "使用 $saas-cloudbase-zoowork，根据我的业务需求构建 SaaS，先完成可预览的核心流程，再按授权完成验证与交付。"
+
+policy:
+  allow_implicit_invocation: false
