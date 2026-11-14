@@ -42,7 +42,7 @@ CloudBase SDK 路径以 [PG SDK 初始化](https://docs.cloudbase.net/api-refere
 
 | 阶段 | 必需条件 | 缺失时允许继续的工作 |
 | --- | --- | --- |
-| `local` 本地开发 | 已用到的依赖安装与导入检查通过；本地端口和来源一致；受控演示显式隔离。开发真实会话能力时本地 SESSION_SECRET 就绪 | 云端账号与 Key 可未配置；继续文档、纯逻辑、受控测试及可构建部分，不能声称云端登录或 Agent 可用 |
+| `local` 本地开发 | 已用到的依赖安装与导入检查通过；本地端口和来源一致；[本地测试环境](ENVIRONMENT.md#本地测试环境) 显式隔离。开发真实会话能力时本地 SESSION_SECRET 就绪 | 云端账号与 Key 可未配置；继续文档、纯逻辑、受控测试及可构建部分，不能声称云端登录或 Agent 可用 |
 | `cloudbase` 真实基础服务 | 完整 EnvId、站点、地域和应用资源归属明确；管理操作有已授权 MCP／CLI 身份。默认 HTTP 后端路径需要 CLOUDBASE_HTTP_BASE 与后端 CLOUDBASE_APIKEY；原生认证需要其 Publishable Key、提供方及权限；用文件功能时私有桶存在 | 可继续不依赖云端的工作；阻断真实数据／认证／文件接通的完成结论 |
 | `provision` 企业成员开通 | 默认应用数据与会话路径就绪；APP_ID、PORTAL_PROVIDER_ID、后端 PARTNER_API_KEY 和 ENTERPRISE_ENCRYPTION_KEY 就绪；会话需 SESSION_SECRET；Partner 只读认证通过 | 可实现受控回归；不正式开通企业／员工，不以服务商 Key 执行 Agent |
 | `agent` 员工 Agent 执行 | 应用、成员与对象权限通过；后端已有该员工的加密凭据及版本，解密和只读认证有效；SDK、实例归属及实际可用模型／Skill 权限满足本任务。真实模型调用另需既有费用授权 | 员工尚未接受邀请或开通时标记未就绪；不要求用户手填员工 Key，不使用共享或管理员身份回退 |

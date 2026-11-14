@@ -44,7 +44,7 @@ UI 包需要 React／React DOM，获取和版本适配由 Codex 处理。依赖�
 | `npm run dev:api` | 启动本地 Hono 后端，显式加载本地后端配置 |
 | `npm run doctor -- --stage local` | 按 [前置合同](PREREQUISITES.md) 检查 local／cloudbase／provision／agent／deploy；默认 local，只读且无开通、安装、发码或模型副作用 |
 | `npm run methods:build` | 有自有 Skill 时生成确定的包与文件清单 |
-| `npm run check` | 方法构建一致性、类型、有意义的回归及生产构建 |
+| `npm run check` | 方法构建一致性、类型、[本地隔离回归](ENVIRONMENT.md#本地测试环境)及生产构建 |
 | `npm run build:cloudbase` | 构建 CloudRun 前后端产物，验证目标 Node 运行方式 |
 
 需要迁移、部署和维护脚本时，必须显式指定目标环境、检查当前提交与发布状态。应用启动不隐式运行破坏性迁移，不在每次启动时重复开通企业、成员或发布 Skill。
