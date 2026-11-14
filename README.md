@@ -22,7 +22,7 @@
 | --- | --- | --- |
 | 开始任务必读 | [开发执行流程](docs/WORKFLOW.md) | 核心流程、实施顺序和阶段完成条件 |
 | 初始化和真实接入前 | [开发前置检查](docs/PREREQUISITES.md) | 工具、SDK／UI、分阶段 Key 准入与只读诊断 |
-| 创建、填写或加载本地配置前 | [.env 生命周期](docs/ENVIRONMENT.md) | 安全创建、不覆盖、忽略、后端加载与生产隔离 |
+| 准备本地测试或后端配置 | [本地测试与 .env 生命周期](docs/ENVIRONMENT.md) | 测试依赖、数据与验收边界，以及配置创建、加载和隔离 |
 | 架构与环境准备 | [架构与配置](docs/ARCHITECTURE.md) | 默认技术方案、身份隔离与变量合同 |
 | 企业成员及用量接入 | [ZooWork 接入](docs/ZOOWORK.md) | Partner 管理与员工 Agent 身份分离 |
 | 任何 Agent／后台任务实现前 | [Agent、业务 Skill 与任务](docs/AGENTS_AND_SKILLS.md) | 多 Agent 编排、方法版本、持久恢复和定时服务 |
